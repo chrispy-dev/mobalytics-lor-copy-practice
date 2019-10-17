@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-const Header = () => {
+const Header = ({ cards }) => {
     return (
         <HeaderContainer>
             <GalleryTitle>Card Gallery</GalleryTitle>
-            <GallerySubtext>found <CardsFound>316</CardsFound> from 316 cards.</GallerySubtext>
+            <GallerySubtext>found <CardsFound>{cards.length}</CardsFound> from 318 cards.</GallerySubtext>
         </HeaderContainer>
     );
 };
@@ -30,7 +31,13 @@ const GallerySubtext = styled.h3`
 `;
 
 const HeaderContainer = styled.div`
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
 `;
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        cards: state.cards
+    }
+}
+
+export default connect(mapStateToProps, null)(Header);
