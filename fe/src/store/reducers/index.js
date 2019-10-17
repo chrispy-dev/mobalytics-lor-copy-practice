@@ -1,4 +1,4 @@
-import { cards } from '../../card-data/data/set1-en_us';
+import { cards } from '../../card-data/set1-en_us';
 import _ from 'underscore';
 
 import {
