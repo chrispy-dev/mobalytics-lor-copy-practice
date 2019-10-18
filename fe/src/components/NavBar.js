@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { NavLink } from './NavMenu';
 
 const NavBar = () => {
     return (
         <Nav>
-            <Logo><Chris>CHRIS</Chris>ALYTICS</Logo>
+            <Logo to="/"><Chris>CHRIS</Chris>ALYTICS</Logo>
             <InnerNav>
                 <NavLink active topNav to="core-set">Core Set</NavLink>
                 <NavLink active topNav to="guides">Guides</NavLink>
@@ -24,7 +25,8 @@ const Nav = styled.nav`
     box-shadow: rgb(20, 11, 36) 0px 2px 6px 0px;
 `;
 
-const Logo = styled.h2`
+const Logo = styled(Link)`
+    text-decoration: none;
     font-size: 1rem;
     font-weight: 200;
     color: white;

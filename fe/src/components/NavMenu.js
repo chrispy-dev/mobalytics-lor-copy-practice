@@ -20,32 +20,41 @@ const NavMenu = ({ menuToggle, toggleNavMenu }) => {
             <LongHr></LongHr>
             <LinkContainer>
                 <NavLinkContainer>
-                    <NavIcon active className="fas fa-address-book"></NavIcon>
+                    <Link to="/card-gallery">
+                        <NavIcon active className="fas fa-address-book"></NavIcon>
+                    </Link>
                     {menuToggle && <NavLink active to="/card-gallery">Card Gallery</NavLink>}
                 </NavLinkContainer>
                 <NavLinkContainer>
-                    <NavIcon className="fas fa-book-open"></NavIcon>
+                    <Link to="/deck-library">
+                        <NavIcon className="fas fa-book-open"></NavIcon>
+                    </Link>
                     {menuToggle && <NavLink to="/deck-library">Deck Library</NavLink>}
                 </NavLinkContainer>
                 <NavLinkContainer>
                     <NavIcon className="fas fa-tasks"></NavIcon>
-                    {menuToggle && <NavLink to="/deck-library">Deck Manager</NavLink>}
+                    {menuToggle && <NavLink to="/deck-manager">Deck Manager</NavLink>}
                 </NavLinkContainer>
                 <NavLinkContainer>
                     <NavIcon className="fas fa-shapes"></NavIcon>
-                    {menuToggle && <NavLink to="/deck-library">Deck Builder</NavLink>}
+                    {menuToggle && <NavLink to="/deck-builder">Deck Builder</NavLink>}
                 </NavLinkContainer>
             </LinkContainer>
         </Nav>
     );
 };
 
-const LongHr = styled.hr`
+export const LongHr = styled.hr`
     width: 100%;
     margin: 0;
     background-color: #291F4F;
     border: none;
     height: 1px;
+
+    ${props =>
+    props.manaCost && css`
+        width: 66%;
+    `}
 `;
 
 const LinkContainer = styled.div`
@@ -102,13 +111,25 @@ export const NavLink = styled(Link)`
     `}
 `;
 
-const NavIcon = styled.i`
+export const NavIcon = styled.i`
     color: rgba(170, 171, 202, .5);
     cursor: pointer;
 
     ${props =>
         props.active && css`
             color: rgba(170, 171, 202, 1);
+    `}
+
+    ${props =>
+        props.cardType && css`
+            margin-right: 15px;
+            font-size: 1.1rem;
+    `}
+
+    ${props =>
+        props.follower && css`
+            margin-right: 19px;
+            font-size: 1.1rem;
     `}
 `;
 

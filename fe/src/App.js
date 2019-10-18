@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Route } from 'react-router-dom';
 
 import NavMenu from './components/NavMenu';
+import Landing from './components/Landing';
+import DeckLibrary from './components/deck-library/DeckLibrary';
 import CardGallery from './components/card-gallery/CardGallery';
 import NavBar from './components/NavBar';
 
@@ -13,7 +16,10 @@ function App() {
       <NavBar />
       <MainContent>
         <NavMenu />
-        <CardGallery />
+
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/card-gallery" component={CardGallery} />
+        <Route exact path="/deck-library" component={DeckLibrary} />
       </MainContent>
     </AppContainer>
   );
