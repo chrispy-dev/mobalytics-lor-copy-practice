@@ -31,7 +31,7 @@ const GallerySubtext = styled.h3`
 `;
 
 const HeaderContainer = styled.div`
-    padding: 20px;
+
 `;
 
 const mapStateToProps = (state) => {

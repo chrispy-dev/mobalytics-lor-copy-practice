@@ -2,15 +2,21 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 
+import { toggleFilter } from '../../store/actions';
 import AdvancedFilter from './AdvancedFilter';
 import Header from './Header';
 
-const CardGallery = ({ cards }) => {
+const CardGallery = ({ cards, toggleFilter, filterToggle }) => {
 
     return (
         <Container>
-            <FlexContainer>
-                <Header />
+            <FlexContainer column>
+                <FlexContainer top>
+                    <Header />
+                    <FilterButton hidden={!filterToggle} onClick={() => toggleFilter()}>
+                        <i class="fas fa-filter"></i>
+                    </FilterButton>
+                </FlexContainer>
                 <CardsContainer>
                     {cards.map(card => (
                         <StyledImg key={card.cardCode} src={`./img/cards/${card.cardCode}.png`} alt="#" />
@@ -22,15 +28,51 @@ const CardGallery = ({ cards }) => {
     );
 };
 
+const FilterButton = styled.div`
+    background-color: #171038;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    border: 2px solid #3ABDEC;
+    border-radius: 5px;
+
+    i {
+        color: white;
+    }
+
+    ${({ hidden }) => hidden && css`
+        border: 2px solid #CCAD70;
+    `}
+`;
+
 const FlexContainer = styled.div`
     display: flex;
-    flex-direction: column;
+
+    ${props =>
+    props.column && css`
+        flex-direction: column; 
+    `}
+
+    ${props =>
+    props.top && css`
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        padding: 20px;
+    `}
 `;
 
 export const Container = styled.div`
     height: calc(100vh - 53px);
     background-color: rgba(45, 38, 79, 0.9);
     display: flex;
+
+    ${({ hide }) => hide && css`
+        display: none;
+    `}
 
     ${props =>
     props.landing && css`
@@ -79,8 +121,9 @@ const StyledImg = styled.img`
 
 const mapStateToProps = (state) => {
     return {
-        cards: state.cards
+        cards: state.cards,
+        filterToggle: state.filterToggle
     }
 }
 
-export default connect(mapStateToProps, null)(CardGallery);
+export default connect(mapStateToProps, { toggleFilter })(CardGallery);

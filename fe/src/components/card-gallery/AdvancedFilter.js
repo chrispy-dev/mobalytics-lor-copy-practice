@@ -1,15 +1,17 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { connect } from 'react-redux';
 
+import { toggleFilter } from '../../store/actions';
 import { Container } from './CardGallery';
 import { LongHr, NavIcon } from '../NavMenu';
 
-const AdvancedFilter = () => {
+const AdvancedFilter = ({ filterToggle, toggleFilter }) => {
     return (
-        <Container advancedFilter>
+        <Container hide={!filterToggle} advancedFilter>
             <ToggleContainer>
                 <FilterTitle>Filters</FilterTitle>
-                <ButtonContainer>
+                <ButtonContainer onClick={() => toggleFilter()}>
                     <ToggleButton className="fas fa-times"></ToggleButton>
                 </ButtonContainer>
             </ToggleContainer>
@@ -198,7 +200,7 @@ const ButtonContainer = styled.div`
     background-color: #4c4277;
 `;
 
-const ToggleButton = styled.i`
+export const ToggleButton = styled.i`
     color: #160D33;
     font-size: 1.2rem;
 `;
@@ -215,4 +217,10 @@ const FilterTitle = styled.h2`
     `}
 `;
 
-export default AdvancedFilter;
+const mapStateToProps = (state) => {
+    return {
+        filterToggle: state.filterToggle
+    };
+};
+
+export default connect(mapStateToProps, { toggleFilter })(AdvancedFilter);
