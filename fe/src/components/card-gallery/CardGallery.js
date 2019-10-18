@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { toggleFilter } from '../../store/actions';
 import AdvancedFilter from './AdvancedFilter';
+import SearchBar from './SearchBar';
 import Header from './Header';
 
 const CardGallery = ({ cards, toggleFilter, filterToggle }) => {
@@ -13,9 +14,12 @@ const CardGallery = ({ cards, toggleFilter, filterToggle }) => {
             <FlexContainer column>
                 <FlexContainer top>
                     <Header />
-                    <FilterButton hidden={!filterToggle} onClick={() => toggleFilter()}>
-                        <i class="fas fa-filter"></i>
-                    </FilterButton>
+                    <FlexContainer>
+                        <SearchBar />
+                        <FilterButton hidden={!filterToggle} onClick={() => toggleFilter()}>
+                            <i class="fas fa-filter"></i>
+                        </FilterButton>
+                    </FlexContainer>
                 </FlexContainer>
                 <CardsContainer>
                     {cards.map(card => (
