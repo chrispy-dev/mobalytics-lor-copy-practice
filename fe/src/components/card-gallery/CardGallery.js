@@ -2,14 +2,17 @@ import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 
-import { toggleFilter } from '../../store/actions';
+import { toggleFilter, checkForOptions } from '../../store/actions';
 import AdvancedFilter from './AdvancedFilter';
 import HandledSearchBar from './HandledSearchBar';
 import Header from './Header';
 
-const CardGallery = ({ cards, toggleFilter, filterToggle, filterOptions }) => {
+const CardGallery = ({ cards, toggleFilter, filterToggle, filterOptions, checkForOptions }) => {
     useEffect(() => {
-        console.log(filterOptions);
+        // checkForOptions();
+        console.log(filterOptions.regions)
+        console.log(filterOptions.manaCosts)
+        console.log(filterOptions.types)
     }, [filterOptions])
 
     return (
@@ -142,4 +145,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { toggleFilter })(CardGallery);
+export default connect(mapStateToProps, { toggleFilter, checkForOptions })(CardGallery);

@@ -13,17 +13,17 @@ const NavMenu = ({ menuToggle, toggleNavMenu }) => {
             <NavLinkContainer toggleButton onClick={() => toggleNavMenu()}>
                 {
                     menuToggle
-                    ? <NavIcon active className="fas fa-chevron-left"></NavIcon>
-                    : <NavIcon active className="fas fa-chevron-right"></NavIcon>
+                    ? <NavIcon className="fas fa-chevron-left"></NavIcon>
+                    : <NavIcon className="fas fa-chevron-right"></NavIcon>
                 }
             </NavLinkContainer>
             <LongHr></LongHr>
             <LinkContainer>
                 <NavLinkContainer>
                     <Link to="/card-gallery">
-                        <NavIcon active className="fas fa-address-book"></NavIcon>
+                        <NavIcon className="fas fa-address-book"></NavIcon>
                     </Link>
-                    {menuToggle && <NavLink active to="/card-gallery">Card Gallery</NavLink>}
+                    {menuToggle && <NavLink to="/card-gallery">Card Gallery</NavLink>}
                 </NavLinkContainer>
                 <NavLinkContainer>
                     <Link to="/deck-library">
@@ -112,12 +112,12 @@ export const NavLink = styled(Link)`
 `;
 
 export const NavIcon = styled.i`
-    color: rgba(170, 171, 202, .5);
+    color: rgb(170, 171, 202);
     cursor: pointer;
+    opacity: 0.5;
 
-    ${props =>
-        props.active && css`
-            color: rgba(170, 171, 202, 1);
+    ${({ active }) => active && css`
+        opacity: 1;
     `}
 
     ${props =>

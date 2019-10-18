@@ -22,47 +22,47 @@ const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFil
                     <LongHr></LongHr>
                 </FlexContainer>
                 <FlexContainer region>
-                    <SingleCategoryContainer onClick={() => filterOptions.includes('Demacia') 
+                    <SingleCategoryContainer onClick={() => filterOptions.regions.includes('Demacia') 
                         ? removeFilterOption('Demacia')
                         : addFilterOption('Demacia')
                     }>
-                        <RegionImg active={filterOptions.includes('Demacia')} src="./img/regions/icon-demacia.png" alt="#" />
-                        <CategoryText active={filterOptions.includes('Demacia')}>Demacia</CategoryText>
+                        <RegionImg active={filterOptions.regions.includes('Demacia')} src="./img/regions/icon-demacia.png" alt="#" />
+                        <CategoryText active={filterOptions.regions.includes('Demacia')}>Demacia</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer onClick={() => filterOptions.includes('Freljord') 
+                    <SingleCategoryContainer onClick={() => filterOptions.regions.includes('Freljord') 
                         ? removeFilterOption('Freljord')
                         : addFilterOption('Freljord')
                     }>
-                        <RegionImg active={filterOptions.includes('Freljord')} src="./img/regions/icon-freljord.png" alt="#" />
-                        <CategoryText active={filterOptions.includes('Freljord')}>Freljord</CategoryText>
+                        <RegionImg active={filterOptions.regions.includes('Freljord')} src="./img/regions/icon-freljord.png" alt="#" />
+                        <CategoryText active={filterOptions.regions.includes('Freljord')}>Freljord</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer onClick={() => filterOptions.includes('Ionia') 
+                    <SingleCategoryContainer onClick={() => filterOptions.regions.includes('Ionia') 
                         ? removeFilterOption('Ionia')
                         : addFilterOption('Ionia')
                     }>
-                        <RegionImg active={filterOptions.includes('Ionia')} src="./img/regions/icon-ionia.png" alt="#" />
-                        <CategoryText active={filterOptions.includes('Ionia')}>Ionia</CategoryText>
+                        <RegionImg active={filterOptions.regions.includes('Ionia')} src="./img/regions/icon-ionia.png" alt="#" />
+                        <CategoryText active={filterOptions.regions.includes('Ionia')}>Ionia</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer onClick={() => filterOptions.includes('Noxus') 
+                    <SingleCategoryContainer onClick={() => filterOptions.regions.includes('Noxus') 
                         ? removeFilterOption('Noxus')
                         : addFilterOption('Noxus')
                     }>
-                        <RegionImg active={filterOptions.includes('Noxus')} src="./img/regions/icon-noxus.png" alt="#" />
-                        <CategoryText active={filterOptions.includes('Noxus')}>Noxus</CategoryText>
+                        <RegionImg active={filterOptions.regions.includes('Noxus')} src="./img/regions/icon-noxus.png" alt="#" />
+                        <CategoryText active={filterOptions.regions.includes('Noxus')}>Noxus</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer onClick={() => filterOptions.includes('Piltover & Zaun') 
+                    <SingleCategoryContainer onClick={() => filterOptions.regions.includes('Piltover & Zaun') 
                         ? removeFilterOption('Piltover & Zaun')
                         : addFilterOption('Piltover & Zaun')
                     }>
-                        <RegionImg active={filterOptions.includes('Piltover & Zaun')} src="./img/regions/icon-piltoverzuan.png" alt="#" />
-                        <CategoryText active={filterOptions.includes('Piltover & Zaun')}>Piltover &#38; Zaun</CategoryText>
+                        <RegionImg active={filterOptions.regions.includes('Piltover & Zaun')} src="./img/regions/icon-piltoverzuan.png" alt="#" />
+                        <CategoryText active={filterOptions.regions.includes('Piltover & Zaun')}>Piltover &#38; Zaun</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer onClick={() => filterOptions.includes('Shadow Isles') 
+                    <SingleCategoryContainer onClick={() => filterOptions.regions.includes('Shadow Isles') 
                         ? removeFilterOption('Shadow Isles')
                         : addFilterOption('Shadow Isles')
                     }>
-                        <RegionImg active={filterOptions.includes('Shadow Isles')} src="./img/regions/icon-shadowisles.png" alt="#" />
-                        <CategoryText active={filterOptions.includes('Shadow Isles')}>Shadow Isles</CategoryText>
+                        <RegionImg active={filterOptions.regions.includes('Shadow Isles')} src="./img/regions/icon-shadowisles.png" alt="#" />
+                        <CategoryText active={filterOptions.regions.includes('Shadow Isles')}>Shadow Isles</CategoryText>
                     </SingleCategoryContainer>
                 </FlexContainer>
             </Container>
@@ -74,16 +74,40 @@ const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFil
                 </FlexContainer>
                 <FlexContainer region>
                     <FlexContainer rowOne>
-                        <ManaBubble>0</ManaBubble>
-                        <ManaBubble>1</ManaBubble>
-                        <ManaBubble>2</ManaBubble>
-                        <ManaBubble>3</ManaBubble>
-                        <ManaBubble>4</ManaBubble>
+                        <ManaBubble active={filterOptions.manaCosts.includes(0)} onClick={() => filterOptions.manaCosts.includes(0) 
+                            ? removeFilterOption(0)
+                            : addFilterOption(0)
+                        }>0</ManaBubble>
+                        <ManaBubble active={filterOptions.manaCosts.includes(1)} onClick={() => filterOptions.manaCosts.includes(1) 
+                            ? removeFilterOption(1)
+                            : addFilterOption(1)
+                        }>1</ManaBubble>
+                        <ManaBubble active={filterOptions.regions.includes(2)} onClick={() => filterOptions.manaCosts.includes(2) 
+                            ? removeFilterOption(2)
+                            : addFilterOption(2)
+                        }>2</ManaBubble>
+                        <ManaBubble active={filterOptions.regions.includes(3)} onClick={() => filterOptions.manaCosts.includes(3) 
+                            ? removeFilterOption(3)
+                            : addFilterOption(3)
+                        }>3</ManaBubble>
+                        <ManaBubble active={filterOptions.regions.includes(4)} onClick={() => filterOptions.manaCosts.includes(4) 
+                            ? removeFilterOption(4)
+                            : addFilterOption(4)
+                        }>4</ManaBubble>
                     </FlexContainer>
                     <FlexContainer rowTwo>
-                        <ManaBubble>5</ManaBubble>
-                        <ManaBubble>6</ManaBubble>
-                        <ManaBubble>7+</ManaBubble>
+                        <ManaBubble active={filterOptions.regions.includes(5)} onClick={() => filterOptions.manaCosts.includes(5) 
+                            ? removeFilterOption(5)
+                            : addFilterOption(5)
+                        }>5</ManaBubble>
+                        <ManaBubble active={filterOptions.regions.includes(6)} onClick={() => filterOptions.manaCosts.includes(6) 
+                            ? removeFilterOption(6)
+                            : addFilterOption(6)
+                        }>6</ManaBubble>
+                        <ManaBubble active={filterOptions.regions.includes('7+')} onClick={() => filterOptions.manaCosts.includes('7+') 
+                            ? removeFilterOption('7+')
+                            : addFilterOption('7+')
+                        }>7+</ManaBubble>
                     </FlexContainer>
                 </FlexContainer>
             </Container>
@@ -94,17 +118,26 @@ const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFil
                     <LongHr></LongHr>
                 </FlexContainer>
                 <FlexContainer region>
-                    <SingleCategoryContainer cardType>
-                        <NavIcon cardType className="fas fa-hat-wizard"></NavIcon>
-                        <CategoryText>Champion</CategoryText>
+                    <SingleCategoryContainer cardType onClick={() => filterOptions.types.includes('Champion') 
+                        ? removeFilterOption('Champion')
+                        : addFilterOption('Champion')
+                    }>
+                        <NavIcon active={filterOptions.types.includes('Champion')} cardType className="fas fa-hat-wizard"></NavIcon>
+                        <CategoryText active={filterOptions.types.includes('Champion')}>Champion</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer cardType>
-                        <NavIcon cardType className="fab fa-gripfire"></NavIcon>
-                        <CategoryText>Spell</CategoryText>
+                    <SingleCategoryContainer cardType onClick={() => filterOptions.types.includes('Spell') 
+                        ? removeFilterOption('Spell')
+                        : addFilterOption('Spell')
+                    }>
+                        <NavIcon active={filterOptions.types.includes('Spell')} cardType className="fab fa-gripfire"></NavIcon>
+                        <CategoryText active={filterOptions.types.includes('Spell')}>Spell</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer cardType>
-                        <NavIcon cardType follower className="fas fa-fist-raised"></NavIcon>
-                        <CategoryText>Follower</CategoryText>
+                    <SingleCategoryContainer cardType onClick={() => filterOptions.types.includes('Follower') 
+                        ? removeFilterOption('Follower')
+                        : addFilterOption('Follower')
+                    }>
+                        <NavIcon active={filterOptions.types.includes('Follower')} cardType follower className="fas fa-fist-raised"></NavIcon>
+                        <CategoryText active={filterOptions.types.includes('Follower')}>Follower</CategoryText>
                     </SingleCategoryContainer>
                 </FlexContainer>
             </Container>
@@ -152,6 +185,10 @@ const ManaBubble = styled.div`
     align-items: center;
     border-radius: 50%;
     opacity: 0.3;
+
+    ${({ active }) => active && css`
+        opacity: 1;
+    `}
 `;
 
 const CategoryText = styled.span`
