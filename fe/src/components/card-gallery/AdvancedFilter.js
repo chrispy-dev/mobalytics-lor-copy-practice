@@ -2,11 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 
-import { toggleFilter } from '../../store/actions';
+import { toggleFilter, addFilterOption, removeFilterOption } from '../../store/actions';
 import { Container } from './CardGallery';
 import { LongHr, NavIcon } from '../NavMenu';
 
-const AdvancedFilter = ({ filterToggle, toggleFilter }) => {
+const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFilterOption, filterOptions }) => {
     return (
         <Container hide={!filterToggle} advancedFilter>
             <ToggleContainer>
@@ -22,29 +22,47 @@ const AdvancedFilter = ({ filterToggle, toggleFilter }) => {
                     <LongHr></LongHr>
                 </FlexContainer>
                 <FlexContainer region>
-                    <SingleCategoryContainer>
-                        <RegionImg src="./img/regions/icon-demacia.png" alt="#" />
-                        <CategoryText>Demacia</CategoryText>
+                    <SingleCategoryContainer onClick={() => filterOptions.includes('Demacia') 
+                        ? removeFilterOption('Demacia')
+                        : addFilterOption('Demacia')
+                    }>
+                        <RegionImg active={filterOptions.includes('Demacia')} src="./img/regions/icon-demacia.png" alt="#" />
+                        <CategoryText active={filterOptions.includes('Demacia')}>Demacia</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer>
-                        <RegionImg src="./img/regions/icon-freljord.png" alt="#" />
-                        <CategoryText>Freljord</CategoryText>
+                    <SingleCategoryContainer onClick={() => filterOptions.includes('Freljord') 
+                        ? removeFilterOption('Freljord')
+                        : addFilterOption('Freljord')
+                    }>
+                        <RegionImg active={filterOptions.includes('Freljord')} src="./img/regions/icon-freljord.png" alt="#" />
+                        <CategoryText active={filterOptions.includes('Freljord')}>Freljord</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer>
-                        <RegionImg src="./img/regions/icon-ionia.png" alt="#" />
-                        <CategoryText>Ionia</CategoryText>
+                    <SingleCategoryContainer onClick={() => filterOptions.includes('Ionia') 
+                        ? removeFilterOption('Ionia')
+                        : addFilterOption('Ionia')
+                    }>
+                        <RegionImg active={filterOptions.includes('Ionia')} src="./img/regions/icon-ionia.png" alt="#" />
+                        <CategoryText active={filterOptions.includes('Ionia')}>Ionia</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer>
-                        <RegionImg src="./img/regions/icon-noxus.png" alt="#" />
-                        <CategoryText>Noxus</CategoryText>
+                    <SingleCategoryContainer onClick={() => filterOptions.includes('Noxus') 
+                        ? removeFilterOption('Noxus')
+                        : addFilterOption('Noxus')
+                    }>
+                        <RegionImg active={filterOptions.includes('Noxus')} src="./img/regions/icon-noxus.png" alt="#" />
+                        <CategoryText active={filterOptions.includes('Noxus')}>Noxus</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer>
-                        <RegionImg src="./img/regions/icon-piltoverzuan.png" alt="#" />
-                        <CategoryText>Piltover &#38; Zaun</CategoryText>
+                    <SingleCategoryContainer onClick={() => filterOptions.includes('Piltover & Zaun') 
+                        ? removeFilterOption('Piltover & Zaun')
+                        : addFilterOption('Piltover & Zaun')
+                    }>
+                        <RegionImg active={filterOptions.includes('Piltover & Zaun')} src="./img/regions/icon-piltoverzuan.png" alt="#" />
+                        <CategoryText active={filterOptions.includes('Piltover & Zaun')}>Piltover &#38; Zaun</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer>
-                        <RegionImg src="./img/regions/icon-shadowisles.png" alt="#" />
-                        <CategoryText>Shadow Isles</CategoryText>
+                    <SingleCategoryContainer onClick={() => filterOptions.includes('Shadow Isles') 
+                        ? removeFilterOption('Shadow Isles')
+                        : addFilterOption('Shadow Isles')
+                    }>
+                        <RegionImg active={filterOptions.includes('Shadow Isles')} src="./img/regions/icon-shadowisles.png" alt="#" />
+                        <CategoryText active={filterOptions.includes('Shadow Isles')}>Shadow Isles</CategoryText>
                     </SingleCategoryContainer>
                 </FlexContainer>
             </Container>
@@ -99,7 +117,7 @@ const AdvancedFilter = ({ filterToggle, toggleFilter }) => {
                 <FlexContainer region>
                     <SingleCategoryContainer cardType>
                         <NavIcon cardType className="far fa-circle"></NavIcon>
-                        <CategoryText>Champion</CategoryText>
+                        <CategoryText>Legendary</CategoryText>
                     </SingleCategoryContainer>
                     <SingleCategoryContainer cardType>
                         <NavIcon cardType className="far fa-circle"></NavIcon>
@@ -137,20 +155,29 @@ const ManaBubble = styled.div`
 `;
 
 const CategoryText = styled.span`
-    color: rgba(170, 171, 202, 1);
+    color: rgb(170, 171, 202);
     font-size: 0.9rem;
     font-weight: 600;
+
+    ${({ active }) => active && css`
+        color: #CCAD70;
+    `}
 `;
 
 const RegionImg = styled.img`
     height: 28px;
     opacity: 0.3;
     margin-right: 10px;
+
+    ${({ active }) => active && css`
+        opacity: 1;
+    `}
 `;
 
 const SingleCategoryContainer = styled.div`
     margin: 5px 0;
     width: 50%;
+    cursor: pointer;
     display: flex;
     align-items: center;
 
@@ -219,8 +246,9 @@ const FilterTitle = styled.h2`
 
 const mapStateToProps = (state) => {
     return {
-        filterToggle: state.filterToggle
+        filterToggle: state.filterToggle,
+        filterOptions: state.filterOptions
     };
 };
 
-export default connect(mapStateToProps, { toggleFilter })(AdvancedFilter);
+export default connect(mapStateToProps, { toggleFilter, addFilterOption, removeFilterOption })(AdvancedFilter);

@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 
 import { toggleFilter } from '../../store/actions';
 import AdvancedFilter from './AdvancedFilter';
-import SearchBar from './SearchBar';
+import HandledSearchBar from './HandledSearchBar';
 import Header from './Header';
 
-const CardGallery = ({ cards, toggleFilter, filterToggle }) => {
+const CardGallery = ({ cards, toggleFilter, filterToggle, filterOptions }) => {
+    useEffect(() => {
+        console.log(filterOptions);
+    }, [filterOptions])
 
     return (
-        <Container>
+        <Container spaceBetween>
             <FlexContainer column>
                 <FlexContainer top>
                     <Header />
                     <FlexContainer>
-                        <SearchBar />
+                        <HandledSearchBar />
                         <FilterButton hidden={!filterToggle} onClick={() => toggleFilter()}>
-                            <i class="fas fa-filter"></i>
+                            <i className="fas fa-filter"></i>
                         </FilterButton>
                     </FlexContainer>
                 </FlexContainer>
@@ -57,7 +60,8 @@ const FlexContainer = styled.div`
 
     ${props =>
     props.column && css`
-        flex-direction: column; 
+        flex-direction: column;
+        width: 100%; 
     `}
 
     ${props =>
@@ -73,6 +77,7 @@ export const Container = styled.div`
     height: calc(100vh - 53px);
     background-color: rgba(45, 38, 79, 0.9);
     display: flex;
+    width: 100%;
 
     ${({ hide }) => hide && css`
         display: none;
@@ -88,6 +93,7 @@ export const Container = styled.div`
     props.advancedFilter && css`
         background-color: #160D33;
         min-width: 320px;
+        max-width: 320px;
         flex-direction: column;
         padding: 20px;
         height: 100%;
@@ -102,6 +108,11 @@ export const Container = styled.div`
         width: 100%;
         flex-direction: column;
     `}
+
+    ${props =>
+    props.spaceBetween && css`
+        justify-content: space-between;
+    `}
 `;
 
 const CardsContainer = styled.div`
@@ -109,8 +120,8 @@ const CardsContainer = styled.div`
     overflow: scroll;
     padding: 0 10px 10px 10px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
 `;
 
@@ -126,7 +137,8 @@ const StyledImg = styled.img`
 const mapStateToProps = (state) => {
     return {
         cards: state.cards,
-        filterToggle: state.filterToggle
+        filterToggle: state.filterToggle,
+        filterOptions: state.filterOptions
     }
 }
 

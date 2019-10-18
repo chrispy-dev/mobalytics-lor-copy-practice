@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-const SearchBar = () => {
+import { handleInputChange, searchInputTerm } from '../../store/actions';
+
+const HandledSearchBar = ({ searchTerm, handleInputChange, searchInputTerm }) => {
+    useEffect(() => {
+        searchInputTerm();
+    }, [searchTerm])
+
     return (
         <SearchBarContainer>
             <i className="fas fa-search"></i>
-            <input placeholder="Search by name, keywords" />
+            <input 
+                placeholder="Search for name, keywords" 
+                value={searchTerm} 
+                onChange={(event) => handleInputChange(event.target.value)} 
+            />
         </SearchBarContainer>
     );
 };
@@ -39,4 +50,10 @@ const SearchBarContainer = styled.div`
     }
 `;
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+    return {
+        searchTerm: state.searchTerm
+    };
+};
+
+export default connect(mapStateToProps, { handleInputChange, searchInputTerm })(HandledSearchBar);
