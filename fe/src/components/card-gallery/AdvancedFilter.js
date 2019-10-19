@@ -2,11 +2,17 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 
-import { toggleFilter, addFilterOption, removeFilterOption } from '../../store/actions';
+import { toggleFilter, addFilterOption, removeFilterOption, clearIndividualFitler } from '../../store/actions';
 import { Container } from './CardGallery';
 import { LongHr, NavIcon } from '../NavMenu';
 
-const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFilterOption, filterOptions }) => {
+const AdvancedFilter = ({ 
+    filterToggle, 
+    toggleFilter, 
+    addFilterOption, 
+    removeFilterOption, 
+    filterOptions,
+    clearIndividualFitler }) => {
     return (
         <Container hide={!filterToggle} advancedFilter>
             <ToggleContainer>
@@ -17,9 +23,14 @@ const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFil
             </ToggleContainer>
 
             <Container filterFlexItem>
+
+                {/* ===== REGION ===== */}
+
                 <FlexContainer>
                     <FilterTitle subTitle>REGION</FilterTitle>
                     <LongHr></LongHr>
+                    {filterOptions.regions.length !== 0 
+                    && <IndividualClear onClick={() => clearIndividualFitler('region')}>clear</IndividualClear>}
                 </FlexContainer>
                 <FlexContainer region>
                     <SingleCategoryContainer onClick={() => filterOptions.regions.includes('Demacia') 
@@ -67,10 +78,14 @@ const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFil
                 </FlexContainer>
             </Container>
 
+            {/* ===== MANA COST ===== */}
+
             <Container filterFlexItem>
                 <FlexContainer>
-                    <FilterTitle subTitle>MANA COST</FilterTitle>
+                    <FilterTitle manaSubTitle>MANA COST</FilterTitle>
                     <LongHr manaCost></LongHr>
+                    {filterOptions.manaCosts.length !== 0 
+                    && <IndividualClear onClick={() => clearIndividualFitler('cost')}>clear</IndividualClear>}
                 </FlexContainer>
                 <FlexContainer region>
                     <FlexContainer rowOne>
@@ -82,48 +97,52 @@ const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFil
                             ? removeFilterOption(1)
                             : addFilterOption(1)
                         }>1</ManaBubble>
-                        <ManaBubble active={filterOptions.regions.includes(2)} onClick={() => filterOptions.manaCosts.includes(2) 
+                        <ManaBubble active={filterOptions.manaCosts.includes(2)} onClick={() => filterOptions.manaCosts.includes(2) 
                             ? removeFilterOption(2)
                             : addFilterOption(2)
                         }>2</ManaBubble>
-                        <ManaBubble active={filterOptions.regions.includes(3)} onClick={() => filterOptions.manaCosts.includes(3) 
+                        <ManaBubble active={filterOptions.manaCosts.includes(3)} onClick={() => filterOptions.manaCosts.includes(3) 
                             ? removeFilterOption(3)
                             : addFilterOption(3)
                         }>3</ManaBubble>
-                        <ManaBubble active={filterOptions.regions.includes(4)} onClick={() => filterOptions.manaCosts.includes(4) 
+                        <ManaBubble active={filterOptions.manaCosts.includes(4)} onClick={() => filterOptions.manaCosts.includes(4) 
                             ? removeFilterOption(4)
                             : addFilterOption(4)
                         }>4</ManaBubble>
                     </FlexContainer>
                     <FlexContainer rowTwo>
-                        <ManaBubble active={filterOptions.regions.includes(5)} onClick={() => filterOptions.manaCosts.includes(5) 
+                        <ManaBubble active={filterOptions.manaCosts.includes(5)} onClick={() => filterOptions.manaCosts.includes(5) 
                             ? removeFilterOption(5)
                             : addFilterOption(5)
                         }>5</ManaBubble>
-                        <ManaBubble active={filterOptions.regions.includes(6)} onClick={() => filterOptions.manaCosts.includes(6) 
+                        <ManaBubble active={filterOptions.manaCosts.includes(6)} onClick={() => filterOptions.manaCosts.includes(6) 
                             ? removeFilterOption(6)
                             : addFilterOption(6)
                         }>6</ManaBubble>
-                        <ManaBubble active={filterOptions.regions.includes('7+')} onClick={() => filterOptions.manaCosts.includes('7+') 
-                            ? removeFilterOption('7+')
+                        <ManaBubble active={[7, 8, 9, 10, 11, 12].every((val) => filterOptions.manaCosts.includes(val))} onClick={() => [7, 8, 9, 10, 11, 12].every((val) => filterOptions.manaCosts.includes(val)) 
+                            ? removeFilterOption('REMOVE')
                             : addFilterOption('7+')
                         }>7+</ManaBubble>
                     </FlexContainer>
                 </FlexContainer>
             </Container>
 
+            {/* ===== TYPE ===== */}
+
             <Container filterFlexItem>
                 <FlexContainer>
                     <FilterTitle subTitle>TYPE</FilterTitle>
                     <LongHr></LongHr>
+                    {filterOptions.types.length !== 0 
+                    && <IndividualClear onClick={() => clearIndividualFitler('type')}>clear</IndividualClear>}
                 </FlexContainer>
                 <FlexContainer region>
-                    <SingleCategoryContainer cardType onClick={() => filterOptions.types.includes('Champion') 
-                        ? removeFilterOption('Champion')
-                        : addFilterOption('Champion')
+                    <SingleCategoryContainer cardType onClick={() => filterOptions.types.includes('Unit') 
+                        ? removeFilterOption('Unit')
+                        : addFilterOption('Unit')
                     }>
-                        <NavIcon active={filterOptions.types.includes('Champion')} cardType className="fas fa-hat-wizard"></NavIcon>
-                        <CategoryText active={filterOptions.types.includes('Champion')}>Champion</CategoryText>
+                        <NavIcon active={filterOptions.types.includes('Unit')} cardType follower className="fas fa-fist-raised"></NavIcon>
+                        <CategoryText active={filterOptions.types.includes('Unit')}>Unit</CategoryText>
                     </SingleCategoryContainer>
                     <SingleCategoryContainer cardType onClick={() => filterOptions.types.includes('Spell') 
                         ? removeFilterOption('Spell')
@@ -132,43 +151,60 @@ const AdvancedFilter = ({ filterToggle, toggleFilter, addFilterOption, removeFil
                         <NavIcon active={filterOptions.types.includes('Spell')} cardType className="fab fa-gripfire"></NavIcon>
                         <CategoryText active={filterOptions.types.includes('Spell')}>Spell</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer cardType onClick={() => filterOptions.types.includes('Follower') 
-                        ? removeFilterOption('Follower')
-                        : addFilterOption('Follower')
-                    }>
-                        <NavIcon active={filterOptions.types.includes('Follower')} cardType follower className="fas fa-fist-raised"></NavIcon>
-                        <CategoryText active={filterOptions.types.includes('Follower')}>Follower</CategoryText>
-                    </SingleCategoryContainer>
                 </FlexContainer>
             </Container>
+
+            {/* ===== RARITY ===== */}
 
             <Container filterFlexItem>
                 <FlexContainer>
                     <FilterTitle subTitle>RARITY</FilterTitle>
                     <LongHr></LongHr>
+                    {filterOptions.rarities.length !== 0 
+                    && <IndividualClear onClick={() => clearIndividualFitler('rarity')}>clear</IndividualClear>}
                 </FlexContainer>
                 <FlexContainer region>
-                    <SingleCategoryContainer cardType>
-                        <NavIcon cardType className="far fa-circle"></NavIcon>
-                        <CategoryText>Legendary</CategoryText>
+                    <SingleCategoryContainer cardType onClick={() => filterOptions.rarities.includes('Champion') 
+                        ? removeFilterOption('Champion')
+                        : addFilterOption('Champion')
+                    }>
+                        <NavIcon active={filterOptions.rarities.includes('Champion')} cardType className="far fa-circle"></NavIcon>
+                        <CategoryText active={filterOptions.rarities.includes('Champion')}>Champion</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer cardType>
-                        <NavIcon cardType className="far fa-circle"></NavIcon>
-                        <CategoryText>Rare</CategoryText>
+                    <SingleCategoryContainer cardType onClick={() => filterOptions.rarities.includes('Rare') 
+                        ? removeFilterOption('Rare')
+                        : addFilterOption('Rare')
+                    }>
+                        <NavIcon active={filterOptions.rarities.includes('Rare')} cardType className="far fa-circle"></NavIcon>
+                        <CategoryText active={filterOptions.rarities.includes('Rare')}>Rare</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer cardType>
-                        <NavIcon cardType className="far fa-circle"></NavIcon>
-                        <CategoryText>Epic</CategoryText>
+                    <SingleCategoryContainer cardType onClick={() => filterOptions.rarities.includes('Epic') 
+                        ? removeFilterOption('Epic')
+                        : addFilterOption('Epic')
+                    }>
+                        <NavIcon active={filterOptions.rarities.includes('Epic')} cardType className="far fa-circle"></NavIcon>
+                        <CategoryText active={filterOptions.rarities.includes('Epic')}>Epic</CategoryText>
                     </SingleCategoryContainer>
-                    <SingleCategoryContainer cardType>
-                        <NavIcon cardType className="far fa-circle"></NavIcon>
-                        <CategoryText>Common</CategoryText>
+                    <SingleCategoryContainer cardType onClick={() => filterOptions.rarities.includes('Common') 
+                        ? removeFilterOption('Common')
+                        : addFilterOption('Common')
+                    }>
+                        <NavIcon active={filterOptions.rarities.includes('Common')} cardType className="far fa-circle"></NavIcon>
+                        <CategoryText active={filterOptions.rarities.includes('Common')}>Common</CategoryText>
                     </SingleCategoryContainer>
                 </FlexContainer>
             </Container>
         </Container>
     );
 };
+
+const IndividualClear = styled.span`
+    padding-left: 10px;
+    cursor: pointer;
+    color: #CCAD70;
+    font-size: 0.8rem;
+    font-weight: 200;
+`;
 
 const ManaBubble = styled.div`
     height: 42px;
@@ -279,6 +315,13 @@ const FilterTitle = styled.h2`
         font-size: 0.8rem;
         margin-right: 15px;
     `}
+    
+    ${props =>
+    props.manaSubTitle && css`
+        font-size: 0.8rem;
+        margin-right: 15px;
+        white-space: nowrap;
+    `}
 `;
 
 const mapStateToProps = (state) => {
@@ -288,4 +331,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { toggleFilter, addFilterOption, removeFilterOption })(AdvancedFilter);
+export default connect(mapStateToProps, { toggleFilter, addFilterOption, removeFilterOption, clearIndividualFitler })(AdvancedFilter);

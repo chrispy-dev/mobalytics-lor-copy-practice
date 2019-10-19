@@ -2,17 +2,18 @@ import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 
-import { toggleFilter, checkForOptions } from '../../store/actions';
+import { toggleFilter, checkForOptions, clearAllFilters } from '../../store/actions';
 import AdvancedFilter from './AdvancedFilter';
 import HandledSearchBar from './HandledSearchBar';
-import Header from './Header';
+import Header, { GalleryTitle, GallerySubtext } from './Header';
 
-const CardGallery = ({ cards, toggleFilter, filterToggle, filterOptions, checkForOptions }) => {
+const CardGallery = ({ cards, toggleFilter, filterToggle, filterOptions, checkForOptions, clearAllFilters }) => {
     useEffect(() => {
-        // checkForOptions();
-        console.log(filterOptions.regions)
-        console.log(filterOptions.manaCosts)
-        console.log(filterOptions.types)
+        checkForOptions();
+        console.log('Regions: ', filterOptions.regions);
+        console.log('Mana Costs: ', filterOptions.manaCosts);
+        console.log('Types: ', filterOptions.types);
+        console.log('Rarities: ', filterOptions.rarities);
     }, [filterOptions])
 
     return (
@@ -28,15 +29,36 @@ const CardGallery = ({ cards, toggleFilter, filterToggle, filterOptions, checkFo
                     </FlexContainer>
                 </FlexContainer>
                 <CardsContainer>
-                    {cards.map(card => (
-                        <StyledImg key={card.cardCode} src={`./img/cards/${card.cardCode}.png`} alt="#" />
-                    ))}
+                    {cards.length !== 0
+                    ? <>
+                        {cards.map(card => (
+                            <StyledImg key={card.cardCode} src={`./img/cards/${card.cardCode}.png`} alt="#" />
+                        ))}
+                    </>
+                    : <NoResults>
+                        <GalleryTitle>No cards</GalleryTitle>
+                        <GallerySubtext>Adjust the filters in order to see cards.</GallerySubtext>
+                        <ClearButton onClick={() => clearAllFilters()}>Clear all filters</ClearButton>
+                    </NoResults>
+                    }
                 </CardsContainer>
             </FlexContainer>
             <AdvancedFilter />
         </Container>
     );
 };
+
+const ClearButton = styled.p`
+    cursor: pointer;
+    color: #CCAD70;
+`;
+
+const NoResults = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
 
 const FilterButton = styled.div`
     background-color: #171038;
@@ -90,6 +112,7 @@ export const Container = styled.div`
     props.landing && css`
         justify-content: center;
         align-items: center;
+        flex-direction: column;
     `}
 
     ${props =>
@@ -145,4 +168,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { toggleFilter, checkForOptions })(CardGallery);
+export default connect(mapStateToProps, { toggleFilter, checkForOptions, clearAllFilters })(CardGallery);

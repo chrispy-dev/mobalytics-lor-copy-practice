@@ -11,7 +11,7 @@ const Header = ({ cards }) => {
     );
 };
 
-const GalleryTitle = styled.h2`
+export const GalleryTitle = styled.h2`
     margin: 0;
     color: white;
     font-size: 1.8rem;
@@ -22,7 +22,7 @@ const CardsFound = styled.span`
     color: white;
 `;
 
-const GallerySubtext = styled.h3`
+export const GallerySubtext = styled.h3`
     color: rgba(170, 171, 202, 1);
     font-size: 0.9rem;
     font-weight: 400;

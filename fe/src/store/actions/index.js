@@ -5,6 +5,8 @@ export const HANDLE_INPUT_CHANGE = 'HANDLE_INPUT_CHANGE';
 export const ADD_FILTER_OPTION = 'ADD_FILTER_OPTION';
 export const REMOVE_FILTER_OPTION = 'REMOVE_FILTER_OPTION';
 export const CHECK_FOR_OPTIONS = 'CHECK_FOR_OPTIONS';
+export const CLEAR_ALL_FILTERS = 'CLEAR_ALL_FILTERS';
+export const CLEAR_INDIVIDUAL_FILTER = 'CLEAR_INDIVIDUAL_FILTER';
 
 export const toggleNavMenu = () => (dispatch) => {
     dispatch({ type: TOGGLE_NAV_MENU });
@@ -23,13 +25,21 @@ export const searchInputTerm = () => (dispatch) => {
 };
 
 export const addFilterOption = (filterOption) => (dispatch) => {
-    dispatch({ type: ADD_FILTER_OPTION, payload: filterOption })
+    dispatch({ type: ADD_FILTER_OPTION, payload: filterOption });
 };
 
 export const removeFilterOption = (filterOption) => (dispatch) => {
-    dispatch({ type: REMOVE_FILTER_OPTION, payload: filterOption })
+    dispatch({ type: REMOVE_FILTER_OPTION, payload: filterOption });
 };
 
 export const checkForOptions = () => (dispatch) => {
     dispatch({ type: CHECK_FOR_OPTIONS });
 };
+
+export const clearAllFilters = () => (dispatch) => {
+    dispatch({ type: CLEAR_ALL_FILTERS });
+};
+
+export const clearIndividualFitler = (filterOption) => (dispatch) => {
+    dispatch({ type: CLEAR_INDIVIDUAL_FILTER, payload: filterOption });
+}

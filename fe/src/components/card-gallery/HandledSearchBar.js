@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { handleInputChange, searchInputTerm } from '../../store/actions';
 
-const HandledSearchBar = ({ searchTerm, handleInputChange, searchInputTerm }) => {
+const HandledSearchBar = ({ searchTerm, handleInputChange, searchInputTerm, filteredCards }) => {
     useEffect(() => {
         searchInputTerm();
     }, [searchTerm])
@@ -52,7 +52,8 @@ const SearchBarContainer = styled.div`
 
 const mapStateToProps = (state) => {
     return {
-        searchTerm: state.searchTerm
+        searchTerm: state.searchTerm,
+        filteredCards: state.filteredCards
     };
 };
 
